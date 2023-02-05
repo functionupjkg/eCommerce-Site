@@ -3,7 +3,7 @@ const customerModel = require("../model/customerModel")
 const { isValidObjectId, isValidString, isValidVision } = require("../validation/validate");
 
 
-
+//--------------------------------------------[Create New Card API ]-------------------------------------------------------//
 const createCard = async (req, res) => {
     try {
 
@@ -31,7 +31,7 @@ const createCard = async (req, res) => {
         if (!data.vision) return res.status(400).send({ status: false, message: "Vision is required" });
         // if (!isValidVision(data.vision)) return res.status(400).send({ status: false, message: "Invalid Vision !" });
 
-        let customerData = await customerModel.findOne({_id: id})
+        let customerData = await customerModel.findOne({ _id: id })
         console.log(customerData)
         if (!customerData) return res.status(404).send({ status: false, message: "Customer does not exist." });
 
@@ -66,13 +66,13 @@ let getAllCard = async (req, res) => {
         if (data.status) {
             if (!["ACTIVE", "INACTIVE"].includes(data.status))
                 return res.status(400).send({ status: false, message: "Status should be ACTIVE or INACTIVE only" });
-           data.status = data.status;
+            data.status = data.status;
         }
 
         if (data.cardType) {
             if (!["Regular", "Special"].includes(data.cardType))
                 return res.status(400).send({ status: false, message: "CardType should be Regular or Special only" })
-                data.cardType = data.cardType;
+            data.cardType = data.cardType;
         }
 
         if (data.customerId) {
